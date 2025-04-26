@@ -1,0 +1,16 @@
+Guest Report with Valet Status - Generated at 2025-04-25_09-12-05
+
+Guest ID: 5881
+Name: Bill Doe
+Room: 104
+Check-In: 2025-04-20
+Check-Out: 2025-04-25
+Valet: Yes
+------------------------------------------------
+Guest ID: 995
+Name: Will Smith
+Room: 105
+Check-In: 2025-04-20
+Check-Out: 2025-04-25
+Valet: Yes
+------------------------------------------------
