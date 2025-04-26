@@ -1,0 +1,14 @@
+=== OCCUPANCY SUMMARY ===
+checked-in: 2
+checked-out: 2
+booked: 3
+
+=== VALET PARKING ===
+Total vehicles: 1
+Currently parked: 0
+
+=== ROOM STATUS ===
+Room 180: checked-out
+Room 293: checked-in
+Room 307: checked-out
+Room 399: checked-in
