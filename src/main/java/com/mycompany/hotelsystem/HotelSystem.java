@@ -15,7 +15,7 @@ public class HotelSystem {
         ReceptionistManager receptionistManager = new ReceptionistManager();
         ReservationSystem reservationSystem = new ReservationSystem();
         AdminManager adminManager = new AdminManager();
-        CheckOutSystem checkOutSystem = new CheckOutSystem(); // ✅ Checkout system added
+        CheckOutSystem checkOutSystem = new CheckOutSystem(); 
 
         // Use MM-dd-yyyy for date input
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
