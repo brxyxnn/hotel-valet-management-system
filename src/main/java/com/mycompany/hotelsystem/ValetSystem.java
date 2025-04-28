@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
 
 public class ValetSystem {
 
@@ -13,29 +15,24 @@ public class ValetSystem {
     private static final String PASSWORD = "test";
 
     public void processValetRequest() {
-        Scanner sc = new Scanner(System.in);
 
-        System.out.print("Assign valet? (Y/N): ");
-        if (!sc.nextLine().equalsIgnoreCase("Y")) {
-            System.out.println("Valet service declined.");
+        String valetChoice = JOptionPane.showInputDialog("Assign valet? (Y/N)");
+        if (!valetChoice.equalsIgnoreCase("Y")) {
+            JOptionPane.showMessageDialog(null, "Valet service declined.");
             return;
         }
 
-        System.out.print("Enter guest name: ");
-        String name = sc.nextLine();
+        String name = JOptionPane.showInputDialog("Enter guest name");
 
-        System.out.print("Enter license plate number (min 6 characters): ");
-        String plate = sc.nextLine();
-        if (plate.length() < 6) {
-            System.out.println("License plate must be at least 6 characters.");
-            return;
+        String plate = JOptionPane.showInputDialog("Enter license plate number (min 6 characters)");
+        while(plate.length() < 6) {
+            JOptionPane.showMessageDialog(null, "License plate must be at least 6 characters.");
+            plate = JOptionPane.showInputDialog("Enter license plate number (min 6 characters)");
         }
 
-        System.out.print("Enter vehicle location (e.g., Front, Lot B): ");
-        String location = sc.nextLine();
+        String location = JOptionPane.showInputDialog("Enter vehicle location (e.g., Front, Lot B)");
 
-        System.out.print("Return vehicle now? (Y/N): ");
-        boolean returned = sc.nextLine().equalsIgnoreCase("Y");
+        boolean returned = JOptionPane.showInputDialog("Return vehicle now? (Y/N)").equalsIgnoreCase("Y");
 
         // Save to MySQL
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
@@ -47,13 +44,11 @@ public class ValetSystem {
             stmt.setBoolean(4, returned);
 
             stmt.executeUpdate();
-            System.out.println("Valet logged successfully!");
-            System.out.println("Guest: " + name);
-            System.out.println("Location: " + location);
-            System.out.println("Returned: " + (returned ? "Yes" : "No"));
+            JOptionPane.showMessageDialog(null, 
+            "Valet logged successfully!\nGuest: " + name + "\nLocation: " + location + "\nReturned: " + (returned ? "Yes" : "No"));
 
         } catch (SQLException e) {
-            System.out.println("Failed to log valet: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Failed to log valet: " + e.getMessage());
         }
     }
 }

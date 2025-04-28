@@ -3,6 +3,8 @@ package com.mycompany.hotelsystem;
 
 import java.sql.*;
 import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
 
 public class CheckOutSystem {
     private static final String URL = "jdbc:mysql://localhost:3306/hotelsystem";
@@ -15,8 +17,7 @@ public class CheckOutSystem {
         try (
             Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)
         ) {
-            System.out.print("Enter Guest ID for checkout: ");
-            int guestID = Integer.parseInt(sc.nextLine());
+            int guestID = Integer.parseInt(JOptionPane.showInputDialog("Enter Guest ID for checkout"));
 
             // Step 1: Find an active reservation
             String findReservation = """
@@ -31,21 +32,18 @@ public class CheckOutSystem {
             ResultSet rs = findStmt.executeQuery();
 
             if (!rs.next()) {
-                System.out.println("No active reservation found for Guest ID: " + guestID);
+                JOptionPane.showMessageDialog(null, "No active reservation found for Guest ID: " + guestID);
                 return;
             }
 
             int reservationId = rs.getInt("id");
 
             // Step 2: Ask physical checkout questions
-            System.out.print("Is the room clean and undamaged? (Y/N): ");
-            boolean clean = sc.nextLine().equalsIgnoreCase("Y");
+            boolean clean = JOptionPane.showInputDialog("Is the room clean and undamaged? (Y/N)").equalsIgnoreCase("Y");
 
-            System.out.print("Was the keycard returned? (Y/N): ");
-            boolean cardReturned = sc.nextLine().equalsIgnoreCase("Y");
+            boolean cardReturned = JOptionPane.showInputDialog("Was the keycard returned? (Y/N)").equalsIgnoreCase("Y");
 
-            System.out.print("Is there a late checkout request? (Y/N): ");
-            boolean lateCheckout = sc.nextLine().equalsIgnoreCase("Y");
+            boolean lateCheckout = JOptionPane.showInputDialog("Is there a late checkout request? (Y/N)").equalsIgnoreCase("Y");
 
             // Step 3: Update reservation status to Checked Out
             String updateReservation = "UPDATE reservations SET status = 'Checked Out' WHERE id = ?";
@@ -61,13 +59,13 @@ public class CheckOutSystem {
 
             // Step 5: Final message
             if (clean && cardReturned && !lateCheckout) {
-                System.out.println("Checkout complete. Reservation closed. Valet returned (if applicable).");
+                JOptionPane.showMessageDialog(null, "Checkout complete. Reservation closed. Valet returned (if applicable).");
             } else {
-                System.out.println("Checkout completed but flagged for staff review (issues noted).");
+                JOptionPane.showMessageDialog(null, "Checkout completed but flagged for staff review (issues noted).");
             }
 
         } catch (Exception e) {
-            System.out.println("Error during checkout: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error during checkout: " + e.getMessage());
         }
     }
 }

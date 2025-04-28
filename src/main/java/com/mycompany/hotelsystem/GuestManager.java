@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.swing.*;
 
 public class GuestManager {
 
@@ -34,9 +35,9 @@ public class GuestManager {
             stmt.setInt(1, guest.getGuestId());
             stmt.setString(2, guest.getName());
             stmt.executeUpdate();
-            System.out.println("Guest inserted into the database!");
+            JOptionPane.showMessageDialog(null, "Guest inserted into the database!");
         } catch (SQLException e) {
-            System.out.println("Failed to insert guest: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Failed to insert guest: " + e.getMessage());
         }
     }
 }

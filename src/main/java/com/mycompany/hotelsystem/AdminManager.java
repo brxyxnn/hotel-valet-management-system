@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.*;
+import java.awt.*;
 
 public class AdminManager {
 
@@ -61,7 +63,7 @@ public class AdminManager {
             writer.flush();
             writer.close();
 
-            System.out.println("Report generated: " + fileName);
+            JOptionPane.showMessageDialog(null, "Report generated: " + fileName);
 
             // Open the report automatically after generating
             File fileToOpen = new File(fileName);
@@ -70,7 +72,7 @@ public class AdminManager {
             }
 
         } catch (Exception e) {
-            System.out.println("Failed to generate report: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Failed to generate report: " + e.getMessage());
         }
     }
 
